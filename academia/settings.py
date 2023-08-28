@@ -148,4 +148,13 @@ MESSAGE_TAGS = {
 MEDIA_ROOT = BASE_DIR/'media'
 MEDIA_URL = '/media/'
 
-CSRF_COOKIE_SECURE = False
+
+CORS_ALLOWED_ORIGINS = [
+    "https://gymmanage-production.up.railway.app",
+    # Other allowed origins
+]
+
+CSRF_TRUSTED_ORIGINS = [
+    "https://gymmanage-production.up.railway.app",
+    # Other trusted origins
+]
