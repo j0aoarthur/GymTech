@@ -36,7 +36,9 @@ def alterarDados(request, usuario_id):
         if person_form.is_valid() and address_formset.is_valid():
             
             person_instance = person_form.save(commit=False)  # Save the Person model instance
-            person_instance.profileImage.name = f"{person.matricula}.{person.profileImage.name.split('.')[-1]}"
+            if person.profileImage is None:
+                person_instance.profileImage.name = f"{person.matricula}.{person.profileImage.name.split('.')[-1]}"
+      
             person_instance.save()
 
             # Link the person to the addresses and save them
