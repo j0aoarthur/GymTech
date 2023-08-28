@@ -1,0 +1,150 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+{% block title %}Alterar dados{% endblock %}
+
+{% block subtitle %}Alterar dados{% endblock %}
+
+{% block breadcrumbs %}
+<li class="breadcrumb-item"><a class="fw-light" href="index.html">Menu Principal</a></li>
+<li class="breadcrumb-item" aria-current="page"><a class="fw-light" href="{% url 'usuarios' %}">Usuários</a></li>
+<li class="breadcrumb-item" aria-current="page"><a class="fw-light" href="{% url 'ver-dados' person.matricula %}">Ver dados</a></li>
+<li class="breadcrumb-item active fw-light" aria-current="page">Alterar dados</li>
+{% endblock %}
+
+{% block content %}
+<!-- Forms Section-->
+<section class="forms">
+  <div class="container-fluid">
+    <div class="row">
+      <!-- Form Elements -->
+      <div class="col-lg-12" id="cadastro_cliente">
+        <div class="card">
+          <div class="card-header d-flex align-items-center justify-content-between">
+            <h3 class="h4 mb-0">Alterar dados de {{person.name}}</h3>
+            <a class="btn btn-secondary rounded-pill" href="{% url 'ver-dados' person.matricula %}">
+              <i class="fa-solid fa-rotate-left"></i>
+              Voltar
+            </a>
+          </div>
+          <div class="card-body">
+            <form class="form-horizontal" method="post" action="{% url 'alterar-dados' person.matricula %}" enctype="multipart/form-data">
+              {% csrf_token %}
+              <div class="row" id="dados-section">
+                <div class="col-sm-3">
+                  <label class="orm-label">Dados Cadastrais</label>
+                  <div class="mt-4 justify-content-center">
+                    <div class="d-flex justify-content-center mb-4">
+                      <img src="{% if person.profileImage %}{{person.profileImage.url}}{% else %}{% static 'img/profile-default.jpeg' %}{% endif %}" id="profileDefault" class="circular-image" alt="Input profile image" />
+                    </div>
+                    <div class="d-flex justify-content-center">
+                      <div class="btn btn-primary btn-rounded">
+                        <label class="form-label text-white m-1" for="{{person_form.profileImage.auto_id}}">Escolher imagem</label>
+                        <input type="file" class="form-control d-none" accept="image/*" onchange="preview()" id="{{person_form.profileImage.auto_id}}"
+                          name="{{person_form.profileImage.html_name}}" />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-9">
+                  <div class="input-material-group mb-3">
+                    {{ person_form.name }}
+                    <label class="label-material" for="name">{{person_form.name.label}}</label>
+                  </div>
+                  <div class="input-material-group mb-3">
+                    {{ person_form.email }}
+                    <label class="label-material" for="email">{{person_form.email.label}}</label>
+                  </div>
+                  <div class="row">
+                    <div class="col input-material-group mb-3">
+                      {{ person_form.cpf }}
+                      <label class="label-material" for="cpf">{{person_form.cpf.label}}</label>
+                    </div>
+                    {% if erro_cpf %}
+                    <div class="invalidFeedback" id="cpfError"><small>CPF já cadastrado</small></div>
+                    {% endif %}
+                    <div class="col input-material-group mb-3">
+                      {{ person_form.birthDate }}
+                      <label class="label-material" for="birthDate">{{person_form.birthDate.label}}</label>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col input-material-group mb-3">
+                      {{ person_form.phone }}
+                      <label class="label-material" for="phone">{{person_form.phone.label}}</label>
+                    </div>
+                    <div class="col form-check align-self-center ms-3">
+                      {{ person_form.whatsapp }}
+                      <label class="form-check-label" for="wpp">{{person_form.whatsapp.label}}</label>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+              {{ address_formset.management_form }}
+              <div class="border-bottom my-5 border-gray-200"></div>
+              <div class="row" id="endereço">
+                <label class="col-sm-3 form-label">Endereço</label>
+                <div class="col-sm-9">
+                  <div class="row">
+                    <div class="col input-material-group mb-3">
+                      {{ address_formset.forms.0.cep }}
+                      <label class="label-material" for="cep">{{address_formset.forms.0.cep.label}}</label>
+                    </div>
+                    <div class="invalidFeedback" id="cepError"><small>Digite um CEP válido</small></div>
+                    <div class="col input-material-group mb-3">
+                      {{ address_formset.forms.0.street }}
+                      <label class="label-material" for="street">{{address_formset.forms.0.street.label}}</label>
+                    </div>
+                  </div>
+
+                  <div class="row">
+
+                    <div class="col input-material-group mb-3">
+                      {{ address_formset.forms.0.neighborhood }}
+                      <label class="label-material" for="neighborhood">{{address_formset.forms.0.neighborhood.label}}</label>
+                    </div>
+
+                    <div class="col input-material-group mb-3">
+                      {{ address_formset.forms.0.city }}
+                      <label class="label-material" for="city">{{address_formset.forms.0.city.label}}</label>
+                    </div>
+
+                  </div>
+                  <div class="row">
+
+                    <div class="col input-material-group mb-3">
+                      {{ address_formset.forms.0.state }}
+                      <label class="label-material" for="state">{{address_formset.forms.0.state.label}}</label>
+                    </div>
+
+                    <div class="col input-material-group mb-3">
+                      {{ address_formset.forms.0.number }}
+                      <label class="label-material" for="num">{{address_formset.forms.0.number.label}}</label>
+                    </div>
+
+                    <div class="col input-material-group mb-3">
+                      {{ address_formset.forms.0.complement }}
+                      <label class="label-material" for="complement">{{address_formset.forms.0.complement.label}}</label>
+                    </div>
+
+                    {{ address_formset.forms.0.id }}
+                    {{ address_formset.forms.0.address_person }}
+
+                  </div>
+                </div>
+              </div>
+              <div class="border-bottom my-5 border-gray-200"></div>
+              <div class="row">
+                <div class="col-sm-9 ms-auto">
+                  <button class="btn btn-primary btn-lg">Cadastrar</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

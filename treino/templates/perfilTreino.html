@@ -1,0 +1,214 @@
+{% extends 'layout.html' %}
+{% load static %}
+{% load customTags %}
+
+{% block title %}Treino : {{person.name}} {% endblock %}
+{% block subtitle %}Treino Detalhado{% endblock %}
+{% block breadcrumbs %}
+<li class="breadcrumb-item"><a class="fw-light" href="{% url 'usuarios' %}">Usuários</a></li>
+<li class="breadcrumb-item active fw-light" aria-current="page">Ver Treino</li>
+{% endblock %}
+{% block content %}
+<section class="workouts">
+  <div class="container-fluid">
+    <div class="row gy-4 align-items-stretch">
+      <div class="col-md-4" id="perfil-detalhado">
+        <div class="card mb-0">
+          <div class="card-header d-flex align-items-center">
+            <h3 class="h4 mb-0">{{person.name}}</h3>
+          </div>
+          <div class="card-body row text-center">
+            <div class="col-md-12 col-sm-6">
+              <img class="circular-image-lg" src="{% if person.profileImage %}{{person.profileImage.url}}{% else %}{% static 'img/profile-default.jpeg' %}{% endif %}" alt="...">
+            </div>
+            <div class="col-md-12 col-sm-5">
+              {% if person.plan.expiration_date|is_past %}
+              <p class="text-danger mt-4">Assinatura expirada</p>
+              {% else %}
+              <p class="text-gray-500 my-3">Válido até: {{person.plan.expiration_date}}</p>
+              {% endif %}
+              <p class=""></p>
+              <form action="{% url 'redirecionar-treino' person.matricula %}" class="row align-items-center justify-content-center">
+                <div class="col-5">
+                  <label class="visually-hidden" for="workout_name">Treino</label>
+                  <select class="form-select" id="workout_name" name="workout_name">
+                    <option selected disabled>Treinos</option>
+                    {% for workout_name in workouts_name %}
+                    <option value="{{workout_name}}">{{workout_name}}</option>
+                    {% endfor %}
+                  </select>
+                </div>
+                <div class="col-2">
+                  <button class="btn btn-primary">Ir</button>
+                </div>
+              </form>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-8" id="treino-completo">
+        <div class="card mb-0 h-100">
+          <div class="card-header d-flex align-items-center justify-content-between">
+            <h3 class="mb-1">Treino {{workout.workout_name}} 
+              <a class="text-gray-600" href="{% url 'alterar-treino' person.matricula workout.workout_name %}">
+                <i class="ms-1 fa-solid fa-pen-to-square"></i>
+              </a>
+              {% if workout.current_quantity > workout.quantity %}
+                <p class="position-absolute ms-1 mt-1 text-danger text-sm">
+                  {{workout.current_quantity}}/{{workout.quantity}} - Treino expirado
+                </p>
+              {% else %}
+                <p class="position-absolute ms-1 mt-1 text-gray-600 text-sm">
+                  {{workout.current_quantity}}/{{workout.quantity}}
+                </p>
+              {% endif %}
+            </h3>
+            <div>
+              <button class="btn btn-danger rounded-pill" type="button" data-bs-toggle="modal"
+                data-bs-target="#createWorkout">
+                Criar novo treino 
+                <i class="ms-1 fa-solid fa-dumbbell"></i>
+              </button>
+              <!-- Modal-->
+              <div class="modal fade text-start" id="createWorkout" tabindex="-1" aria-labelledby="myModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="myModalLabel">Criar novo treino </h5>
+                      <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      <p>Crie um novo treino para {{person.name}}</p>
+                      <form action="{% url 'criar-treino' person.matricula %}" method="post"> 
+                        {% csrf_token %}
+                        <div class="mb-3">
+                          <label class="form-label" for="{{treino_formset.forms.0.workout_name.auto_id}}">Nome do
+                            treino</label>
+                          {{treino_formset.forms.0.workout_name}}
+                        </div>
+                        <div class="row">
+                          <div class="col mb-3">
+                            <label class="form-label"
+                              for="{{treino_formset.forms.0.quantity.auto_id}}">{{treino_formset.forms.0.quantity.label}}</label>
+                            {{treino_formset.forms.0.quantity}}
+                          </div>
+                        </div>
+                        {{ treino_formset.forms.0.id }}
+                        {{ treino_formset.forms.0.workout_person }}
+                        {{ treino_formset.management_form }}
+                        <button class="btn btn-primary" type="submit">Criar</button>
+
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <button class="btn btn-primary rounded-pill" type="button" data-bs-toggle="modal"
+                data-bs-target="#exerciseWorkout">
+                Adicionar exercício <i class="fa-solid fa-plus"></i>
+              </button>
+              <!-- Modal-->
+              <div class="modal fade text-start" id="exerciseWorkout" tabindex="-1" aria-labelledby="myModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="myModalLabel">Adicionar novo exercício ao treino
+                        {{workout.workout_name}} </h5>
+                      <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      <p>Adicione um novo exercício ao treino de {{person.name}}</p>
+                      <form action="{% url 'ver-treino' person.matricula workout.workout_name %}" method="post"> 
+                        {% csrf_token %}
+                        <div class="mb-3">
+                          <label class="form-label" for="{{exercise_formset.forms.0.exercise.auto_id}}">Nome do
+                            exercício</label>
+                          <!-- <input class="form-control" id="modalInputEmail1" type="text" aria-describedby=""> -->
+                          {{exercise_formset.forms.0.exercise}}
+
+                        </div>
+                        <div class="row">
+                          <div class="col mb-3">
+                            <label class="form-label"
+                              for="{{form.series.auto_id}}">{{exercise_formset.forms.0.series.label}}</label>
+                            {{exercise_formset.forms.0.series}}
+                          </div>
+                          <div class="col mb-3">
+                            <label class="form-label"
+                              for="{{form.reps.auto_id}}">{{exercise_formset.forms.0.reps.label}}</label>
+                            {{exercise_formset.forms.0.reps}}
+                          </div>
+                        </div>
+                        {{ exercise_formset.forms.0.id }}
+                        {{ exercise_formset.forms.0.workout }}
+                        {{ exercise_formset.management_form }}
+
+                        <button class="btn btn-primary" type="submit">Adicionar</button>
+
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              {% block edit %}{% endblock %}
+            </div>
+
+          </div>
+          {% if workout_exercises %}
+          <div class="card-body">
+            {% for workout_exercise in workout_exercises %}
+            <div class="p-3 d-flex align-items-center {% cycle 'bg-light' '' %}">
+              <div class="col-4">
+                <small class="text-gray-500">Nome</small>
+                <h5 class="h5 fw-normal text-dark mb-0">{{workout_exercise.exercise.name}}</h5>
+              </div>
+              <div class="col-2">
+                <small class="text-gray-500">Séries</small>
+                <h5 class="h5 fw-normal text-dark mb-0">{{workout_exercise.series}}</h5>
+              </div>
+              <div class="col-2">
+                <small class="text-gray-500">Repetições</small>
+                <h5 class="h5 fw-normal text-dark mb-0">{{workout_exercise.reps}}</h5>
+              </div>
+              <div class="col d-flex justify-content-end">
+                <a class="btn btn-primary"
+                  href="{% url 'alterar-exercicioTreino' person.matricula workout.workout_name workout_exercise.id %}">
+                  <i class="fa-solid fa-pen-to-square"></i>
+                </a>
+                <a class="btn btn-danger mx-3"
+                  href="{% url 'excluir-exercicioTreino' person.matricula workout.workout_name workout_exercise.id %}">
+                  <i class="fa-solid fa-trash"></i>
+                </a>
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+          <div class="card-footer d-flex justify-content-end bg-transparent">
+            <a href="{% url 'treinar' person.matricula workout.workout_name %}" class="btn btn-primary">
+              <i class="fa-solid fa-bolt"></i>
+              Treinar 
+            </a>
+          </div>
+          {% else %}
+          <div class="card-body d-flex align-items-center justify-content-center text-center">
+            <div>
+              <p>Esse treino não possui exercícios <br>Cadastre um exercicio!</p>
+              <button class="btn btn-primary rounded-pill" type="button" data-bs-toggle="modal"
+                data-bs-target="#exerciseWorkout">
+                Adicionar exercício <i class="fa-solid fa-plus"></i>
+              </button>
+            </div>
+            
+
+          </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,40 @@
+{% extends 'perfilTreino.html' %}
+
+{% block edit %}
+<div id="fade" class="modal-backdrop fade show"></div>
+<div class="modal fade show d-block " id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" role="dialog">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content ">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Atualizar Exercício</h1>
+                <a href="{% url 'ver-treino' person.matricula workout.workout_name %}" type="button" class="btn-close"></a>
+            </div>
+            <div class="modal-body">
+                <p>Atualizar exercício do treino {{workout.workout_name}} de {{person.name}}</p>
+                <form action="{% url 'alterar-exercicioTreino' person.matricula workout.workout_name exercise.id %}" method="post"> {% csrf_token %}
+                  <div class="mb-3">
+                    <label class="form-label" for="{{exercise_formset.exercise.auto_id}}">{{exercise_formset.exercise.label}}</label>
+                    <!-- <input class="form-control" id="modalInputEmail1" type="text" aria-describedby=""> -->
+                    {{exercise_formset.exercise}}
+                  </div>
+                  <div class="row">
+                    <div class="col mb-3">
+                      <label class="form-label"
+                        for="{{exercise_formset.series.auto_id}}">{{exercise_formset.series.label}}</label>
+                      {{exercise_formset.series}}
+                    </div>
+                    <div class="col mb-3">
+                      <label class="form-label"
+                        for="{{exercise_formset.reps.auto_id}}">{{exercise_formset.reps.label}}</label>
+                      {{exercise_formset.reps}}
+                    </div>
+                  </div>
+                  <button class="btn btn-primary" type="submit">Adicionar</button>
+
+                </form>
+              </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

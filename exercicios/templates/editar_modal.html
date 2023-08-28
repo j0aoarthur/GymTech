@@ -1,0 +1,33 @@
+{% extends 'exercicios.html' %}
+
+{% block edit %}
+<div id="fade" class="modal-backdrop fade show"></div>
+<div class="modal fade show d-block " id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" role="dialog">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content ">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Atualizar Exercício</h1>
+                <a href="{% url 'exercicios' %}" type="button" class="btn-close"></a>
+            </div>
+            <form action="{% url 'editar-exercicio' exercicio.id %}" method="post"> {% csrf_token %}
+                <div class="modal-body">
+                    <p>Atualizar dados do exercicio</p>
+                    <div class="mb-3">
+                        <label class="form-label" for="name"> {{update_form.name.label}} </label>
+                        {{ update_form.name }}
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="type">{{update_form.type.label}}</label>
+                        {{ update_form.type }}
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary" type="submit">Atualizar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+

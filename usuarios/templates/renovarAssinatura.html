@@ -1,0 +1,140 @@
+{% extends 'layout.html' %}
+{% load static %}
+{% load customTags %}
+
+{% block title %}Renovar Assinatura{% endblock %}
+{% block subtitle %}Renovação de assinatura{% endblock %}
+{% block breadcrumbs %}
+<li class="breadcrumb-item"><a class="fw-light" href="{% url 'usuarios' %}">Usuários</a></li>
+<li class="breadcrumb-item active fw-light" aria-current="page">Renovar
+    Assinatura</li>
+{% endblock %}
+{% block content %}
+
+<section class="workouts">
+    <div class="container-fluid">
+        <div class="row gy-4 align-items-stretch">
+            <div class="col-md-4" id="perfil-detalhado">
+                <div class="card mb-0">
+                    <div class="card-header d-flex align-items-center">
+                        <h3 class="h4 mb-0">{{person.name}}</h3>
+                    </div>
+                    <div class="card-body row text-center">
+                        <div class="col-md-12 col-sm-6">
+                            <img src="{% if person.profileImage %}{{person.profileImage.url}}{% else %}{% static 'img/profile-default.jpeg' %}{% endif %}" id="profileDefault" class="circular-image" alt="Profile image"/>
+                        </div>
+                        <div class="col-md-12 col-sm-5">
+                            {% if person.plan.expiration_date|is_past %}
+                            <p class="text-danger mt-4">Assinatura expirada</p>
+                            {% else %}
+                            <p class="text-success mt-3">Assinatura ativa</p>
+                            <p class="text-gray-500">Válida até:
+                                {{person.plan.expiration_date}}</p>
+                            {% endif %}
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8" id="treino-completo">
+                <div class="card mb-0 h-100">
+                    <div
+                        class="card-header d-flex align-items-center justify-content-between">
+                        <h3 class="mb-1">Assinatura
+                        </h3>
+                    </div>
+                    <div class="modal fade text-start" id="signature"
+                        tabindex="-1" aria-labelledby="myModalLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="myModalLabel">Renovar
+                                        Assinatura </h5>
+                                    <button class="btn-close" type="button"
+                                        data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <form action="{% url 'renovar-assinatura' person.matricula %}" method="post">
+                                    <div class="modal-body">
+                                        <p>Renove a assinatura de {{person.name}}</p>
+                                            {% csrf_token %}
+                                            <div class="row my-3" id="plan-section">
+                                                <div class="col mt-1">
+                                                    {{plan_formset.forms.0.plan_name}}
+                                                </div>
+                                                <div class="input-material-group col">
+                                                    <input class="input-material" type="text" readonly value=" " id="dueDateLabel" name="{{plan_formset.forms.0.expiration_date.html_name}}">
+                                                    <label class="label-material"
+                                                        for="dueDateLabel">Data de
+                                                        expiração do plano</label>
+                                                </div>
+                                            </div>
+                                    </div>
+                                        {{ plan_formset.forms.0.id }}
+                                        {{ plan_formset.forms.0.person }}
+                                        {{ plan_formset.management_form }}
+
+                                    <div class="modal-footer">
+                                        <button class="btn btn-success" type="submit">
+                                            <i class="fa-solid fa-user-plus"></i>
+                                            Renovar assinatura
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    {% if person.plan.expiration_date|is_past %}
+                    <div class="card-body d-flex align-items-center justify-content-center text-center">
+                        <div>
+                            <p>A assinatura de {{person.name}} está expirada desde <strong class="text-danger">{{person.plan.expiration_date}}</strong> . </p>
+
+                            <button class="btn btn-danger" type="button"
+                                data-bs-toggle="modal"
+                                data-bs-target="#signature">
+                                <i class="fa-solid fa-user-plus"></i>
+                                Renovar assinatura
+                            </button>
+                        </div>
+
+                        <!-- Modal-->
+
+                    </div>
+                    {% else %}
+                    <div
+                        class="card-body d-flex align-items-center justify-content-center text-center">
+                        <div>
+                            <p> <strong>{{person.name}}</strong> ainda possui
+                                uma assinatura válida</p>
+
+                            <p class="mx-4">
+                                Caso deseje renovar sua assinatura antes da sua
+                                expiração perderá os dias
+                                restantes e sua <strong>data de vencimento será
+                                    alterada</strong>
+                            </p>
+
+                            <button class="btn btn-success" type="button"
+                                data-bs-toggle="modal"
+                                data-bs-target="#signature">
+                                <i class="fa-solid fa-user-plus"></i>
+                                Renovar assinatura
+                            </button>
+
+                            <button class="btn btn-secondary ms-4"
+                                onclick="window.history.go(-1);" href>
+                                <i class="fa-solid fa-rotate-left"></i>
+                                Voltar
+                            </button>
+                        </div>
+
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

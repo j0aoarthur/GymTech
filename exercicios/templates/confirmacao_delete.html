@@ -1,0 +1,28 @@
+{% extends 'exercicios.html' %}
+
+{% block edit %}
+<div id="fade" class="modal-backdrop fade show"></div>
+<div class="modal fade show d-block " id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" role="dialog">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content ">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Excluir exercicio</h1>
+                <a href="{% url 'exercicios' %}" type="button" class="btn-close"></a>
+            </div>
+            <form action="{% url 'excluir-exercicio' exercicio.id %}" method="post"> {% csrf_token %}
+                <div class="modal-body">
+                    <p class="text-center h6 p-2">Tem certeza que deseja exluir esse exercicio?</p>
+                    <div class="d-flex justify-content-center m-3">
+                        <button class="btn btn-danger" type="submit">Excluir</button>
+                        <a href="{% url 'exercicios' %}" type="button" class="btn btn-secondary mx-2">Voltar</a>
+                        
+                    </div>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+

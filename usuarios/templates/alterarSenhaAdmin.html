@@ -1,0 +1,49 @@
+{% extends 'alterarAdmin.html' %} 
+
+{% block edit %}
+<div id="fade" class="modal-backdrop fade show"></div>
+<div class="modal fade show d-block " id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" role="dialog">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content ">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Alterar Senha</h1>
+                <a href="{% url 'alterar-admin' %}" type="button" class="btn-close"></a>
+            </div>
+            <form action="{% url 'alterar-senha-admin' %}" method="post"> 
+                {% csrf_token %}
+                <div class="modal-body">
+                    <p>Alterar senha do administrador</p>
+                    <div class="mb-3">
+                        <label class="form-label" for="name"> {{passwordForm.old_password.label}} </label>
+                        <input class="form-control" type="password" name="{{ passwordForm.old_password.name }}" id="{{ passwordForm.old_password.auto_id }}">
+
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="{{ passwordForm.new_password1.auto_id }}"> {{passwordForm.new_password1.label}} </label>
+                        <input class="form-control" type="password" name="{{ passwordForm.new_password1.name }}" id="{{ passwordForm.new_password1.auto_id }}">
+                    </div>
+                    {% if passwordForm.new_password2.errors %}
+                      <div class="form-error">
+                        {% for error in passwordForm.new_password2.errors %}
+                            <p>{{ error }}</p>
+                        {% endfor %}
+                      </div>
+
+                    {% else %}
+                      <div class="help-text">
+                        {{passwordForm.new_password1.help_text}}
+                      </div>
+                    {% endif %}
+                    <div class="mb-3">
+                        <label class="form-label" for="{{ passwordForm.new_password2.auto_id }}"> {{passwordForm.new_password2.label}} </label>
+                        <input class="form-control" type="password" name="{{ passwordForm.new_password2.name }}" id="{{ passwordForm.new_password2.auto_id }}">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary" type="submit">Alterar senha</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

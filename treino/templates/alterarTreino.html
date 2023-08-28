@@ -1,0 +1,55 @@
+{% extends 'perfilTreino.html' %}
+
+{% block edit %}
+<div id="fade" class="modal-backdrop fade show"></div>
+<div class="modal fade show d-block " id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" role="dialog">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content ">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Atualizar Treino</h1>
+                <a href="{% url 'ver-treino' person.matricula workout.workout_name %}" type="button" class="btn-close"></a>
+            </div>
+            <form action="{% url 'alterar-treino' person.matricula workout.workout_name %}" method="post"> 
+            <div class="modal-body">
+                <p>Atualizar treino de {{person.name}}</p>
+                  {% csrf_token %}
+                  <div class="mb-3">
+                    <label class="form-label" for="{{treino_formset.workout_name.auto_id}}">Nome do
+                      treino</label>
+                    {{treino_formset.workout_name}}
+                  </div>
+                  <div class="row">
+                    <div class="col mb-3">
+                      <label class="form-label"
+                        for="{{form.quantity.auto_id}}">{{treino_formset.quantity.label}}</label>
+                      {{treino_formset.quantity}}
+                    </div>
+                    <div class="col mb-3">
+                        <label class="form-label"
+                          for="{{form.current_quantity.auto_id}}">{{treino_formset.current_quantity.label}}</label>
+                        {{treino_formset.current_quantity}}
+                      </div>
+                  </div>
+                  {{ treino_formset.id }}
+                  {{ treino_formset.workout_person }}
+                </div>
+                <div class="modal-footer justify-content-between">
+                  <button class="btn btn-primary" type="submit">
+                    <i class="fa-solid fa-pen-to-square"></i>
+                    Alterar
+                  </button>
+                  <a class="btn btn-danger" href="{% url 'apagar-treino' person.matricula workout.workout_name %}">
+                    <i class="fa-solid fa-trash"></i>
+                    Apagar Treino
+                  </a>
+                
+                <!-- Modal-->
+                
+                </div>
+              </form>
+              </div>
+    </div>
+</div>
+
+
+{% endblock %}

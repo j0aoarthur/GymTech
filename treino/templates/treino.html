@@ -1,0 +1,88 @@
+{% extends 'layout.html' %}
+{% load static %}
+{% load customTags %}
+
+{% block title %}Treinos{% endblock %}
+
+{% block subtitle %}Treino{% endblock %}
+
+{% block breadcrumbs %}
+  <li class="breadcrumb-item"><a class="fw-light" href="index.html">Menu Principal</a></li>
+  <li class="breadcrumb-item active fw-light">Treino</li>
+{% endblock %}
+
+{% block content %}
+
+
+<form action="{% url 'treinos' %}" method="get">
+  <h4 class="mt-5 w-75 text-start mx-auto">Buscar usuário</h4>
+  <div class="input-group rounded w-75 mx-auto input-group-lg" role="search">
+      <input type="search" class="form-control rounded-end rounded-4" placeholder="Buscar" name="q" aria-label="Search"
+        aria-describedby="search-addon" />
+      <button class="input-group-text border-0 btn-primary btn rounded-start rounded-4" type="submit" id="search-addon">
+        <i class="fas fa-search text-white"></i>
+      </button>
+  </div>
+</form>
+
+<!-- Forms Section-->
+<section class="forms"> 
+  <div class="container-fluid">
+    <div class="row">
+      <div class="" id="">
+          <div class="card mb-0 h-100">
+            <div class="card-header d-flex align-items-center justify-content-between">
+              <h3 class="h4 mb-0">Usuários</h3>
+            </div>
+            <div class="card-body">
+              {% if people %}
+                {% for person in people %}
+                <div class="p-3 d-flex align-items-center {% cycle 'bg-light' '' %}">
+                  <div class="col-4">
+                    <small class="text-gray-500">Nome</small>
+                    <h3 class="h5 fw-normal text-dark mb-0">{{person.name}}</h3>
+                  </div>
+                  <div class="col-4">
+                    <small class="text-gray-500">Treino Atual</small>
+                    {% if person.current_workout.name.workout_name %}
+                      <h3 class="h5 fw-normal text-dark mb-0">{{person.current_workout.name.workout_name}}</h3>
+                    {% else %}
+                      <h3 class="h5 fw-normal text-dark mb-0">Não possui treino</h3>
+                    {% endif %}
+                  </div>
+
+                  <div class="col d-flex justify-content-end">
+                    {% if person.plan.expiration_date|is_past %}
+                      <a class="btn btn-secondary" href="{% url 'renovar-assinatura' person.matricula %}">
+                        Assinatura expirada
+                      </a>
+                    {% else %}
+                        {% if person.current_workout.name.workout_name == '' %}
+                          <a class="btn btn-danger" href="{% url 'criar-treino' person.matricula %}">
+                            <i class="fa-solid fa-dumbbell fa-lg"></i>
+                            Criar treino
+                          </a>
+                        {% else %}
+                          <a class="btn btn-danger" href="{% url 'ver-treino' person.matricula person.current_workout.name.workout_name %}">
+                            <i class="fa-solid fa-dumbbell fa-lg"></i>
+                            Ver Treino
+                          </a>
+                        {% endif %}
+                    {% endif %}
+                  </div>
+                </div>
+                {% endfor %}
+              {% else %}
+                <div class="d-flex align-items-center justify-content-center">
+                  <p>Não foi encontrado nenhum resultado com este nome</p>
+                </div>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      <!-- Form Elements -->
+      
+    </div>
+  </div>
+</section>
+{% endblock %}

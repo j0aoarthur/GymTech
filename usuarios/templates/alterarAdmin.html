@@ -1,0 +1,94 @@
+{% extends 'layout.html' %} 
+{% load static %} 
+
+{% block title %}Alterar administrador{% endblock %} 
+
+{% block subtitle %}Alterar dados do administrador{% endblock %} 
+
+
+{% block breadcrumbs %}
+<li class="breadcrumb-item">
+  <a class="fw-light" href="{% url 'menu-principal' %}">Menu Principal</a>
+</li>
+<li class="breadcrumb-item active fw-light">
+    <a class="fw-light" href="{% url 'admin' %}">Administrador</a>
+</li>
+<li class="breadcrumb-item active fw-light">Alterar dados do administrador</li>
+{% endblock %} 
+
+{% block content %}
+
+<section class="forms">
+  <div class="container-fluid">
+    <div class="row">
+      <!-- Form Elements -->
+      <div class="col-lg-12" id="cadastro_cliente">
+        <div class="card">
+          <div
+            class="card-header d-flex align-items-center justify-content-between"
+          >
+            <h3 class="h4 mb-0">Alterar dados do administrador</h3>
+            <div>
+              <a
+                class="btn btn-primary mx-2 rounded-pill"
+                href="{% url 'alterar-senha-admin' %}"
+              >
+                <i class="fa-solid fa-pen-to-square"></i>
+                Alterar senha
+            </a>
+              {% block edit %}{% endblock %}
+
+              <button class="btn btn-secondary rounded-pill" onclick="window.history.go(-1);">
+                <i class="fa-solid fa-rotate-left"></i>
+                Voltar
+              </button>
+            </div>
+          </div>
+          <div class="card-body">
+              <form action="{% url 'alterar-admin' %}" method="post">
+                {% csrf_token %}
+            <div class="row" id="dados">
+              <label class="col-sm-3 form-label">Dados Cadastrais</label>
+              <div class="col-sm-9">
+                <div class="row">
+                  <div
+                    class="col input-material-group mb-3"
+                    aria-readonly="true"
+                  >
+                    {{form.first_name}}
+                    <label class="label-material" for="first_name"
+                      >Primeiro Nome</label
+                    >
+                  </div>
+                  <div
+                    class="col input-material-group mb-3"
+                    aria-readonly="true"
+                  >
+                    {{form.last_name}}
+
+                    <label class="label-material" for="last_name"
+                      >Último Nome</label
+                    >
+                  </div>
+                </div>
+                <div class="input-material-group mb-3">
+                  {{form.username}}
+
+                  <label class="label-material" for="username">Username</label>
+                </div>
+              </div>
+            </div>
+            <div class="row mt-4">
+            <div class="col-sm-9 ms-auto">
+                <button class="btn btn-primary btn-lg">Alterar</button>
+            </div>
+            </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

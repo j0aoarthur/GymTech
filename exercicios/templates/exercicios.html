@@ -1,0 +1,97 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+
+{% block title %}Exercícios{% endblock %}
+
+{% block subtitle %}Exercícios{% endblock %}
+
+{% block breadcrumbs %}
+  <li class="breadcrumb-item"><a class="fw-light" href="index.html">Menu Principal</a></li>
+  <li class="breadcrumb-item active fw-light">Exercícios</li>
+{% endblock %}
+
+{% block content %}
+
+<form action="{% url 'exercicios' %}" method="get">
+  <h4 class="mt-5 w-75 text-start mx-auto">Buscar exercicio</h4>
+  <div class="input-group rounded w-75 mx-auto input-group-lg" role="search">
+      <input type="search" class="form-control rounded-end rounded-4" placeholder="Buscar" name="q" aria-label="Search"
+        aria-describedby="search-addon" />
+      <button class="input-group-text border-0 btn-primary btn rounded-start rounded-4" type="submit" id="search-addon">
+        <i class="fas fa-search text-white"></i>
+      </button>
+  </div>
+</form>
+
+<!-- Forms Section-->
+<section class="">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="" id="treino-completo">
+        <div class="card mb-0 h-100">
+          <div class="card-header d-flex align-items-center justify-content-between">
+            <h3 class="h4 mb-0">Exercícios</h3>
+            <button class="btn btn-primary rounded-pill" type="button" data-bs-toggle="modal"
+              data-bs-target="#myModal">
+              <i class="fa-solid fa-plus"></i>
+              Adicionar novo exercício
+            </button>
+            <!-- Modal-->
+            <div class="modal fade text-start" id="myModal" tabindex="-1" aria-labelledby="myModalLabel"
+              aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="myModalLabel">Adicionar novo exercício</h5>
+                    <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <form action="{{exerciciosUrl}}" method="post"> {% csrf_token %}
+                    <div class="modal-body">
+                      <p>Adicione um novo exercício na base de dados</p>
+                      <div class="mb-3">
+                        <label class="form-label" for="name"> {{form.name.label}} </label>
+                        {{ form.name }}
+                      </div>
+                      <div class="mb-3">
+                        <label class="form-label" for="type">{{form.type.label}}</label>
+                        {{ form.type }}
+                      </div>
+                    </div>
+                    <div class="modal-footer">
+                      <button class="btn btn-primary" type="submit">Adicionar</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+            {% block edit %}{% endblock %}
+          </div>
+          <div class="card-body">
+            {% for exercicio in exercicios %}
+            <div class="p-3 d-flex align-items-center {% cycle 'bg-light' '' %}">
+              <div class="col-4">
+                <small class="text-gray-500">Nome</small>
+                <h3 class="h5 fw-normal text-dark mb-0">{{ exercicio.name }}</h3>
+              </div>
+              <div class="col-4">
+                <small class="text-gray-500">Tipo</small>
+                <h3 class="h5 fw-normal text-dark mb-0">{{ exercicio.type }}</h3>
+              </div>
+              <div class="col d-flex justify-content-end">
+                <a href="{% url 'editar-exercicio' exercicio.id %}" class="btn btn-primary">
+                  <i class="fa-solid fa-pen-to-square"></i>
+                </a>
+                <a class="btn btn-danger mx-3" href="{% url 'excluir-exercicio' exercicio.id %}">
+                  <i class="fa-solid fa-trash"></i>
+                </a>
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

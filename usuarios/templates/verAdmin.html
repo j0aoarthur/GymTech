@@ -1,0 +1,151 @@
+{% extends 'layout.html' %} 
+{% load static %} 
+
+{% block title %}Administrador{% endblock %} 
+{% block subtitle %}Administrador{% endblock %} 
+
+{% block breadcrumbs %}
+<li class="breadcrumb-item">
+  <a class="fw-light" href="{% url 'menu-principal' %}">Menu Principal</a>
+</li>
+<li class="breadcrumb-item active fw-light">Administrador</li>
+{% endblock %} 
+
+{% block content %}
+
+<section class="forms">
+  <div class="container-fluid">
+    <div class="row">
+      <!-- Form Elements -->
+      <div class="col-lg-12" id="cadastro_cliente">
+        <div class="card">
+          <div
+            class="card-header d-flex align-items-center justify-content-between"
+          >
+            <h3 class="h4 mb-0">Dados do administrador</h3>
+            <div>
+              <a
+                class="btn btn-primary rounded-pill"
+                href="{% url 'alterar-admin' %}"
+              >
+                <i class="fa-solid fa-pen-to-square"></i>
+                Alterar Dados
+              </a>
+              <button
+                class="btn btn-danger mx-2 rounded-pill"
+                type="button"
+                data-bs-toggle="modal"
+                data-bs-target="#deleteModal"
+              >
+                <i class="fa-solid fa-trash"></i>
+                Apagar admin
+              </button>
+              <div
+                class="modal fade text-start"
+                id="deleteModal"
+                tabindex="-1"
+                aria-labelledby="myModalLabel"
+                aria-hidden="true"
+              >
+                <div class="modal-dialog modal-dialog-centered">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h1 class="modal-title fs-5" id="exampleModalLabel">
+                        Excluir admin
+                      </h1>
+                      <button
+                        class="btn-close"
+                        type="button"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"
+                      ></button>
+                    </div>
+                    <form
+                      action="{% url 'excluir-admin' %}"
+                      method="post"
+                    >
+                      {% csrf_token %}
+                      <div class="modal-body">
+                        <p class="text-center h6 p-2">
+                          Tem certeza que deseja excluir esse administrador?
+                        </p>
+                        <p class="text-center text-sm py-1">
+                          Esse administrador será excluido permanentemente
+                        </p>
+                        <div class="d-flex justify-content-center m-3">
+                          <button class="btn btn-danger" type="submit">
+                            Sim, excluir
+                          </button>
+                          <button
+                            class="btn btn-secondary mx-2"
+                            type="button"
+                            data-bs-dismiss="modal"
+                            aria-label="Close"
+                          >
+                            Não, voltar
+                          </button>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+              <button
+                class="btn btn-secondary rounded-pill"
+                onclick="window.history.go(-1);"
+              >
+                <i class="fa-solid fa-rotate-left"></i>
+                Voltar
+              </button>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="row" id="dados">
+              <label class="col-sm-3 form-label">Dados Cadastrais</label>
+              <div class="col-sm-9">
+                <div class="row">
+
+                    <div class="col input-material-group mb-3" aria-readonly="true">
+                      <input
+                        type="text"
+                        name="first_name"
+                        value="{{user.first_name}}"
+                        id="first_name"
+                        class="input-material"
+                        disabled
+                      />
+                      <label class="label-material" for="first_name">Primeiro Nome</label>
+                    </div>
+                    <div class="col input-material-group mb-3" aria-readonly="true">
+                        <input
+                          type="text"
+                          name="last_name"
+                          value="{{user.last_name}}"
+                          id="last_name"
+                          class="input-material"
+                          disabled
+                        />
+                        <label class="label-material" for="last_name">Último Nome</label>
+                      </div>
+                </div>
+                <div class="input-material-group mb-3">
+                  <input
+                    type="email"
+                    name="email"
+                    value="{{user.username}}"
+                    id="username"
+                    class="input-material"
+                    disabled
+                  />
+                  <label class="label-material" for="username">Username</label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

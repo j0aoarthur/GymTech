@@ -1,0 +1,53 @@
+{% extends 'verDados.html' %}
+
+{% block delete %}
+<div id="fade" class="modal-backdrop fade show"></div>
+<div class="modal fade show d-block " id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" role="dialog">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content ">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Excluir usuário</h1>
+                <a href="{% url 'usuarios' %}" type="button" class="btn-close"></a>
+            </div>
+            <form action="{% url 'excluir-usuarios' person.matricula %}" method="post"> {% csrf_token %}
+                <div class="modal-body">
+                    <p class="text-center h6 p-2">Tem certeza que deseja exluir esse usuário?</p>
+                    <p class="text-center p-2">Esse usuário será excluido permanentemente</p>
+                    <div class="d-flex justify-content-center m-3">
+                        <button class="btn btn-danger" type="submit">Excluir</button>
+                        <a href="{% url 'usuarios' %}" type="button" class="btn btn-secondary mx-2">Voltar</a>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+{% endblock %}
+<button class="btn btn-danger mx-2 rounded-pill" type="button" data-bs-toggle="modal" data-bs-target="#deleteModal">
+    <i class="fa-solid fa-trash-can"></i>
+    Apagar Usuário
+</button>
+
+<!-- Modal-->
+<div class="modal fade text-start" id="deleteModal" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content ">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Excluir usuário</h1>
+                <a href="{% url 'usuarios' %}" type="button" class="btn-close"></a>
+            </div>
+            <form action="{% url 'excluir-usuarios' person.matricula %}" method="post"> {% csrf_token %}
+                <div class="modal-body">
+                    <p class="text-center h6 p-2">Tem certeza que deseja exluir esse usuário?</p>
+                    <p class="text-center p-2">Esse usuário será excluido permanentemente</p>
+                    <div class="d-flex justify-content-center m-3">
+                        <button class="btn btn-danger" type="submit">Excluir</button>
+                        <a href="{% url 'usuarios' %}" type="button" class="btn btn-secondary mx-2">Voltar</a>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,90 @@
+{% extends 'layout.html' %}
+{% load static %}
+{% load customTags %}
+
+{% block title %}Usuários{% endblock %}
+
+{% block subtitle %}Usuários{% endblock %}
+
+{% block breadcrumbs %}
+  <li class="breadcrumb-item"><a class="fw-light" href="index.html">Menu Principal</a></li>
+  <li class="breadcrumb-item active fw-light">Usuários</li>
+{% endblock %}
+
+{% block content %}
+
+<form action="{% url 'usuarios' %}" method="get">
+  <h4 class="mt-5 w-75 text-start mx-auto">Buscar usuário</h4>
+  <div class="input-group rounded w-75 mx-auto input-group-lg" role="search">
+      <input type="search" class="form-control rounded-end rounded-4" placeholder="Buscar" name="q" aria-label="Search"
+        aria-describedby="search-addon" />
+      <button class="input-group-text border-0 btn-primary btn rounded-start rounded-4" type="submit" id="search-addon">
+        <i class="fas fa-search text-white"></i>
+      </button>
+  </div>
+</form>
+
+<section class="tables">
+  <div class="container-fluid">
+    <div class="row gy-3">
+      {% if people %}
+        {% for person in people %}
+        <div class="col-lg-4 col-md-4 col-sm-6">
+          <div class="card mb-0">
+            <div class="card-body">
+              <div class="row d-flex align-items-center">
+                <div class="col-md-6 col-sm-5 mb-2 text-md-center">
+                  <img class=" circular-image-sm" src="{% if person.profileImage %}{{person.profileImage.url}}{% else %}{% static 'img/profile-default.jpeg' %}{% endif %}" alt="Imagem de Perfil">
+                </div>
+                <div class="col-md col-sm text-center ">
+                  <h5 class="text-center"> {{person.name}} </h5>
+                  {% if person.current_workout.name.workout_name == '' %}
+                    <p class="text-sm text-gray-600">Não Possui treinos</p>
+                  {% else %}
+                    <p class="text-sm text-gray-600">Treino atual: {{ person.current_workout.name.workout_name }}</p>
+                  {% endif %}
+                </div>
+              </div>
+
+              <div class="row me-0">
+                {% if person.plan.expiration_date|is_past %}
+                  <a class="pe-0 mx-auto" href="{% url 'renovar-assinatura' person.matricula %}">
+                    <p class="bg-danger text-sm rounded-5 text-white text-center py-1">Assinatura expirada. <br> Clique aqui para renovar</p>
+                  </a>
+                  
+                  <a class="btn btn-primary rounded-3 px-2" href="{% url 'ver-dados' person.matricula %}">
+                    Ver dados
+                  </a>
+                {% else %}
+                  <p class="bg-success rounded-5 text-white text-center p-2">Matriculado até {{ person.plan.expiration_date }}</p>
+                  <a class="btn btn-primary rounded-3 col me-3" href="{% url 'ver-dados' person.matricula %}">
+                    Ver dados
+                  </a>
+
+                  {% if person.current_workout.name.workout_name == '' %}
+                    <a class="btn btn-danger rounded-3 col" href="{% url 'criar-treino' person.matricula %}">
+                      Criar treino
+                    </a>
+                    {% else %}
+                    <a class="btn btn-danger rounded-3 col" href="{% url 'ver-treino' person.matricula %}">
+                      Ver Treino
+                    </a>
+                  {% endif %}
+                  
+                {% endif %}
+                
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      {% else %}
+        <div class="text-center">
+          <p>Não foi encontrado nenhum resultado com este nome</p>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+{% endblock %}

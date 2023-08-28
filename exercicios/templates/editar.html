@@ -1,0 +1,32 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+
+
+<div class="row justify-content-center align-items-center">
+    <div class="col-10">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="h4 mb-0">Editar exercicio</h3>
+            </div>
+            <div class="card-body">
+                <form action="{% url 'editar-exercicio' exercicio.id %}" method="post"
+                    class="row g-3 align-items-center"> {% csrf_token %}
+                    <div class="col-lg">
+                        <label class="visually-hidden" for="inlineFormInputGroupUsername">{{form.name.label}}</label>
+                        {{ form.name }}
+                    </div>
+                    <div class="col-lg">
+                        <label class="visually-hidden" for="inlineFormSelectPref">{{form.name.label}}</label>
+                        {{ form.type }}
+                    </div>
+                    <div class="col-lg">
+                        <button class="btn btn-primary" type="submit">Editar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
