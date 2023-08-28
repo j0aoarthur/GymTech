@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-5t@&_25iqg$kkn8nsm4=)3a)7lunyw@7+*h@$g%=pbftnya89f
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['gymmanage.azurewebsites.net']
+ALLOWED_HOSTS = ['gymmanage.azurewebsites.net','']
 
 
 # Application definition
