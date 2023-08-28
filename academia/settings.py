@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-5t@&_25iqg$kkn8nsm4=)3a)7lunyw@7+*h@$g%=pbftnya89f
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -128,7 +128,8 @@ LOGIN_URL = "/login"
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = 'static/'
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'templates/static')]
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static'), ]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
@@ -146,7 +147,3 @@ MESSAGE_TAGS = {
 
 MEDIA_ROOT = BASE_DIR/'media'
 MEDIA_URL = '/media/'
-
-import os
-if 'WEBSITE_HOSTNAME' in os.environ: # Running on Azure
-    from .azure import *
