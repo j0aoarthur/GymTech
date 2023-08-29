@@ -26,11 +26,6 @@
       rel="stylesheet"
       href="https://fonts.googleapis.com/css?family=Poppins:300,400,700"
     />
-    <!-- Choices CSS-->
-    <link
-      rel="stylesheet"
-      href=" {% static 'vendor/choices.js/public/assets/styles/choices.min.css' %}"
-    />
     <!-- theme stylesheet-->
     <link rel="stylesheet" href="{% static 'css/custom.css' %}" />
     <!-- Custom stylesheet - for your changes-->
@@ -39,6 +34,7 @@
       href="{% static 'css/style.blue.css' %}"
       id="theme-stylesheet"
     />
+    
     <!-- Favicon-->
     <link rel="shortcut icon" href="{% static 'img/favicon.ico' %}" />
     <script
@@ -97,9 +93,9 @@
                 class="nav-menu list-unstyled d-flex flex-md-row align-items-sm-center"
               >
                 <!-- Search-->
-                <li class="nav-item">
+                <li class="nav-item my-0 py-0">
                   <a id="search"></a>
-                  <p class="d-inline me-xl-2">{{current_date}}</p>
+                  <p class="d-inline me-xl-2 mt-5">{{current_date}}</p>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link text-white" href="{% url 'logout' %}">
@@ -238,8 +234,8 @@
         </div>
       </div>
     </div>
-    <!-- JavaScript files-->
-    <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+    <!-- Bootstrap JS link-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
     <!-- Main File-->
     <script src="{% static 'js/front.js' %}"></script>
     <!-- Custom js file -->
