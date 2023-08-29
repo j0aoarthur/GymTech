@@ -37,7 +37,7 @@ servir como um meio de aprendizado contínuo do framework web Django.
 <img src="https://img.shields.io/badge/Bootstrap-563D7C?style=for-the-badge&logo=bootstrap&logoColor=white">
 
 ## Acesso ao Aplicativo
-O GymTech já está disponível online! Você pode acessá-lo pelo link: <a href="[gymtech.cloud](https://gymtech.cloud/)">gymtech.cloud</a> 
+O GymTech já está disponível online! Você pode acessá-lo pelo link: [gymtech.cloud](https://gymtech.cloud/)
 
 Utilize as seguintes credenciais para fazer login como usuário de teste:
 
