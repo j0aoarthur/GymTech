@@ -163,5 +163,5 @@ CORS_ALLOWED_ORIGINS = [
 
 CSRF_TRUSTED_ORIGINS = [
     "https://gymmanage-production.up.railway.app",
-    "https://gymtech.cloud"
+    "https://gymtech.cloud",
 ]
