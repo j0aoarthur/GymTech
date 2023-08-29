@@ -11,8 +11,6 @@
   <meta name="robots" content="all,follow">
   <!-- Google fonts - Poppins -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,700">
-  <!-- Choices CSS-->
-  <link rel="stylesheet" href=" {% static 'vendor/choices.js/public/assets/styles/choices.min.css' %}">
   <!-- theme stylesheet-->
   <link rel="stylesheet" href="{% static 'css/style.blue.css' %}" id="theme-stylesheet">
   <!-- Custom stylesheet - for your changes-->
@@ -26,7 +24,7 @@
 
 <body>
   <div class="login-page">
-    <div class="container d-flex align-items-center position-relative py-5">
+    <div class="container d-flex align-items-center position-relative py-5 col-lg-10 col-9">
       <div class="card shadow-sm w-100 rounded overflow-hidden bg-none">
         <div class="card-body p-0">
           <div class="row gx-0 align-items-stretch">
@@ -42,7 +40,7 @@
             <!-- Form Panel    -->
             <div class="col-lg bg-white">
               {% include "messages.html" %}
-              <div class="d-flex align-items-center px-4 px-lg-5 {% if messages %} h-75 {% else %} h-100{% endif %}">
+              <div class="d-flex align-items-center my-3 my-lg-0 px-4 px-lg-5 {% if messages %} h-50 {% else %} h-75{% endif %}">
                 <form class="login-form w-100" method="post" action="{% url 'login' %}">
                   {% csrf_token %}
                   <div class="input-material-group mb-3">
@@ -57,6 +55,15 @@
                   </div>
                   <button class="btn btn-primary mb-3" id="login" type="submit">Login</button>
                 </form>
+
+                
+              </div>
+              <div class="alert alert-sm alert-dark m-3 rounded-4" role="alert">
+                <div>
+                  <h3>Usuário teste</h3>
+                </div>
+                <div>Nome de usuário: <strong>teste</strong></div>
+                <div>Senha: <strong>123456789</strong></div>
               </div>
             </div>
           </div>
@@ -68,7 +75,7 @@
 
 
   <!-- JavaScript files-->
-  <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
   <!-- Main File-->
   <script src="{% static 'js/front.js' %}"></script>
   <!-- Main File-->

@@ -158,8 +158,10 @@ MEDIA_URL = '/media/'
 
 CORS_ALLOWED_ORIGINS = [
     "https://gymmanage-production.up.railway.app",
+    "https://gymtech.cloud",
 ]
 
 CSRF_TRUSTED_ORIGINS = [
     "https://gymmanage-production.up.railway.app",
+    "https://gymtech.cloud"
 ]
