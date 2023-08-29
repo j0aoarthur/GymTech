@@ -29,14 +29,14 @@
     <div class="row gy-3">
       {% if people %}
         {% for person in people %}
-        <div class="col-lg-4 col-md-4 col-sm-6">
+        <div class="col-lg-4 col-md-4 col-sm-6 col-10 mx-auto mx-sm-0">
           <div class="card mb-0">
             <div class="card-body">
               <div class="row d-flex align-items-center">
-                <div class="col-md-6 col-sm-5 mb-2 text-md-center">
-                  <img class=" circular-image-sm" src="{% if person.profileImage %}{{person.profileImage.url}}{% else %}{% static 'img/profile-default.jpeg' %}{% endif %}" alt="Imagem de Perfil">
+                <div class="col-md-6 col-sm-5 col mb-2 text-center ">
+                  <img class="circular-image-sm" src="{% if person.profileImage %}{{person.profileImage.url}}{% else %}{% static 'img/profile-default.jpeg' %}{% endif %}" alt="Imagem de Perfil">
                 </div>
-                <div class="col-md col-sm text-center ">
+                <div class="col-md col-sm col text-center ">
                   <h5 class="text-center"> {{person.name}} </h5>
                   {% if person.current_workout.name.workout_name == '' %}
                     <p class="text-sm text-gray-600">Não Possui treinos</p>

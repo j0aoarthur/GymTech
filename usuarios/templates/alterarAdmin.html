@@ -51,12 +51,9 @@
               <label class="col-sm-3 form-label">Dados Cadastrais</label>
               <div class="col-sm-9">
                 <div class="row">
-                  <div
-                    class="col input-material-group mb-3"
-                    aria-readonly="true"
-                  >
+                  <div class="col input-material-group mb-3" aria-readonly="true">
                     {{form.first_name}}
-                    <label class="label-material" for="first_name"
+                    <label class="label-material" for="{{form.first_name.auto_id}}"
                       >Primeiro Nome</label
                     >
                   </div>
@@ -66,7 +63,7 @@
                   >
                     {{form.last_name}}
 
-                    <label class="label-material" for="last_name"
+                    <label class="label-material" for="{{form.last_name.auto_id}}"
                       >Último Nome</label
                     >
                   </div>

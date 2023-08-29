@@ -12,14 +12,14 @@
 <section class="workouts">
   <div class="container-fluid">
     <div class="row gy-4 align-items-stretch">
-      <div class="col-md-4" id="perfil-detalhado">
+      <div class="col-md-3" id="perfil-detalhado">
         <div class="card mb-0">
           <div class="card-header d-flex align-items-center">
             <h3 class="h4 mb-0">{{person.name}}</h3>
           </div>
           <div class="card-body row text-center">
             <div class="col-md-12 col-sm-6">
-              <img class="circular-image-lg" src="{% if person.profileImage %}{{person.profileImage.url}}{% else %}{% static 'img/profile-default.jpeg' %}{% endif %}" alt="...">
+              <img class="circular-image-md" src="{% if person.profileImage %}{{person.profileImage.url}}{% else %}{% static 'img/profile-default.jpeg' %}{% endif %}" alt="...">
             </div>
             <div class="col-md-12 col-sm-5">
               {% if person.plan.expiration_date|is_past %}
@@ -29,7 +29,7 @@
               {% endif %}
               <p class=""></p>
               <form action="{% url 'redirecionar-treino' person.matricula %}" class="row align-items-center justify-content-center">
-                <div class="col-5">
+                <div class="col-5 col-sm-7">
                   <label class="visually-hidden" for="workout_name">Treino</label>
                   <select class="form-select" id="workout_name" name="workout_name">
                     <option selected disabled>Treinos</option>
@@ -47,7 +47,7 @@
           </div>
         </div>
       </div>
-      <div class="col-md-8" id="treino-completo">
+      <div class="col-md-9" id="treino-completo">
         <div class="card mb-0 h-100">
           <div class="card-header d-flex align-items-center justify-content-between">
             <h3 class="mb-1">Treino {{workout.workout_name}} 
@@ -67,8 +67,8 @@
             <div>
               <button class="btn btn-danger rounded-pill" type="button" data-bs-toggle="modal"
                 data-bs-target="#createWorkout">
-                Criar novo treino 
-                <i class="ms-1 fa-solid fa-dumbbell"></i>
+                <span class="d-none d-md-inline">Criar treino</span>
+                <i class="ms-sm-1 mx-1 fa-solid fa-dumbbell"></i>
               </button>
               <!-- Modal-->
               <div class="modal fade text-start" id="createWorkout" tabindex="-1" aria-labelledby="myModalLabel"
@@ -107,7 +107,8 @@
               </div>
               <button class="btn btn-primary rounded-pill" type="button" data-bs-toggle="modal"
                 data-bs-target="#exerciseWorkout">
-                Adicionar exercício <i class="fa-solid fa-plus"></i>
+                <span class="d-none d-md-inline">Adicionar exercício</span>
+                <i class="mx-md-0 mx-1 fa-solid fa-plus"></i>
               </button>
               <!-- Modal-->
               <div class="modal fade text-start" id="exerciseWorkout" tabindex="-1" aria-labelledby="myModalLabel"
@@ -126,7 +127,6 @@
                         <div class="mb-3">
                           <label class="form-label" for="{{exercise_formset.forms.0.exercise.auto_id}}">Nome do
                             exercício</label>
-                          <!-- <input class="form-control" id="modalInputEmail1" type="text" aria-describedby=""> -->
                           {{exercise_formset.forms.0.exercise}}
 
                         </div>
@@ -171,7 +171,8 @@
                 <h5 class="h5 fw-normal text-dark mb-0">{{workout_exercise.series}}</h5>
               </div>
               <div class="col-2">
-                <small class="text-gray-500">Repetições</small>
+                <small class="text-gray-500 d-none d-sm-inline">Repetições</small>
+                <small class="text-gray-500 d-sm-none d-inline">Reps.</small>
                 <h5 class="h5 fw-normal text-dark mb-0">{{workout_exercise.reps}}</h5>
               </div>
               <div class="col d-flex justify-content-end">
