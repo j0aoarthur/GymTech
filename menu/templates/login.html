@@ -1,6 +1,6 @@
 {% load static %}
 <!DOCTYPE html>
-<html>
+<html lang="pt-BR">
 
 <head>
   <meta charset="utf-8">
@@ -40,7 +40,7 @@
             <!-- Form Panel    -->
             <div class="col-lg bg-white">
               {% include "messages.html" %}
-              <div class="d-flex align-items-center my-3 my-lg-0 px-4 px-lg-5 {% if messages %} h-50 {% else %} h-75{% endif %}">
+              <div class="d-flex align-items-center my-3 mt-lg-5 px-4 px-lg-5 h-50">
                 <form class="login-form w-100" method="post" action="{% url 'login' %}">
                   {% csrf_token %}
                   <div class="input-material-group mb-3">
@@ -58,7 +58,7 @@
 
                 
               </div>
-              <div class="alert alert-sm alert-dark m-3 rounded-4" role="alert">
+              <div class="alert alert-dark w-75 mx-auto rounded-4 p-3" role="alert">
                 <div>
                   <h3>Usuário teste</h3>
                 </div>
@@ -78,33 +78,6 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
   <!-- Main File-->
   <script src="{% static 'js/front.js' %}"></script>
-  <!-- Main File-->
-  <script>
-    // ------------------------------------------------------- //
-    //   Inject SVG Sprite - 
-    //   see more here 
-    //   https://css-tricks.com/ajaxing-svg-sprite/
-    // ------------------------------------------------------ //
-    function injectSvgSprite(path) {
-
-      var ajax = new XMLHttpRequest();
-      ajax.open("GET", path, true);
-      ajax.send();
-      ajax.onload = function (e) {
-        var div = document.createElement("div");
-        div.className = 'd-none';
-        div.innerHTML = ajax.responseText;
-        document.body.insertBefore(div, document.body.childNodes[0]);
-      }
-    }
-    // this is set to BootstrapTemple website as you cannot 
-    // inject local SVG sprite (using only 'icons/orion-svg-sprite.svg' path)
-    // while using file:// protocol
-    // pls don't forget to change to your domain :)
-    injectSvgSprite('https://bootstraptemple.com/files/icons/orion-svg-sprite.svg');
-
-
-  </script>
   <!-- FontAwesome CSS - loading as last, so it doesn't block rendering-->
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css"
     integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">

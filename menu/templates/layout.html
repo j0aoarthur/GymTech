@@ -1,16 +1,15 @@
-{% load static %} 
-{% load customTags %} 
-{% now "Y" as current_year %} 
-{% url 'menu-principal' as menu %} 
-{% url 'cadastro' as cadastro %} 
-{% url 'usuarios' as usuarios %} 
-{% url 'treinos' as treinos %} 
-{% url 'exercicios' as exerciciosUrl %} 
+{% load static %}
+{% load customTags %}
+{% now "Y" as current_year %}
+{% url 'menu-principal' as menu %}
+{% url 'cadastro' as cadastro %}
+{% url 'usuarios' as usuarios %}
+{% url 'treinos' as treinos %}
+{% url 'exercicios' as exerciciosUrl %}
 {% now "d/m/Y" as current_date %}
 
-
 <!DOCTYPE html>
-<html>
+<html lang="pt-BR">
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -18,29 +17,25 @@
     <meta name="description" content />
     <meta
       name="viewport"
-      content="width=device-width, initial-scale=1, shrink-to-fit=no"
-    />
+      content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="robots" content="all,follow" />
     <!-- Google fonts - Poppins -->
     <link
       rel="stylesheet"
-      href="https://fonts.googleapis.com/css?family=Poppins:300,400,700"
-    />
+      href="https://fonts.googleapis.com/css?family=Poppins:300,400,700" />
     <!-- theme stylesheet-->
     <link rel="stylesheet" href="{% static 'css/custom.css' %}" />
     <!-- Custom stylesheet - for your changes-->
     <link
       rel="stylesheet"
       href="{% static 'css/style.blue.css' %}"
-      id="theme-stylesheet"
-    />
-    
+      id="theme-stylesheet" />
+
     <!-- Favicon-->
     <link rel="shortcut icon" href="{% static 'img/favicon.png' %}" />
     <script
       src="https://kit.fontawesome.com/d6220a3e4a.js"
-      crossorigin="anonymous"
-    ></script>
+      crossorigin="anonymous"></script>
 
     <!-- Tweaks for older IEs-->
     <!--[if lt IE 9]>
@@ -54,8 +49,7 @@
       <!-- Main Navbar-->
       <header class="header z-index-50">
         <nav
-          class="nav navbar py-3 px-0 shadow-sm text-white position-relative"
-        >
+          class="nav navbar py-3 px-0 shadow-sm text-white position-relative">
           <!-- Search Box-->
           <div class="search-box shadow-sm">
             <button class="dismiss d-flex align-items-center">
@@ -66,14 +60,12 @@
           </div>
           <div class="container-fluid w-100">
             <div
-              class="navbar-holder d-flex align-items-center justify-content-between w-100"
-            >
+              class="navbar-holder d-flex align-items-center justify-content-between w-100">
               <!-- Navbar Header-->
               <div class="navbar-header">
                 <!-- Navbar Brand --><a
                   class="navbar-brand d-none d-sm-inline-block"
-                  href="/"
-                >
+                  href="/">
                   <div class="brand-text d-none d-lg-inline-block">
                     <span>Gym</span><strong>Tech</strong>
                   </div>
@@ -84,14 +76,11 @@
                 <!-- Toggle Button--><a
                   class="ms-2 menu-btn active"
                   id="toggle-btn"
-                  href="#"
-                  ><span></span><span></span><span></span
-                ></a>
+                  href="#"><span></span><span></span><span></span></a>
               </div>
               <!-- Navbar Menu -->
               <ul
-                class="nav-menu list-unstyled d-flex flex-md-row align-items-sm-center"
-              >
+                class="nav-menu list-unstyled d-flex flex-md-row align-items-sm-center">
                 <!-- Search-->
                 <li class="nav-item my-0 py-0">
                   <a id="search"></a>
@@ -127,8 +116,7 @@
           </a>
           <ul class="list-unstyled py-4">
             <li
-              class="sidebar-item {% if request.path == menu %} active {% endif %}"
-            >
+              class="sidebar-item {% if request.path == menu %} active {% endif %}">
               <a class="sidebar-link" href="{{menu}}">
                 <i class="fa-solid fa-house fa-lg me-xl-2"></i>
                 Menu Principal
@@ -136,8 +124,7 @@
             </li>
 
             <li
-              class="sidebar-item {% if request.path|starts_with:usuarios %}active{% endif %}"
-            >
+              class="sidebar-item {% if request.path|starts_with:usuarios %}active{% endif %}">
               <a class="sidebar-link" href="{{usuarios}}">
                 <i class="fa-solid fa-user fa-lg me-xl-2"></i>
                 Usuários
@@ -145,8 +132,7 @@
             </li>
 
             <li
-              class="sidebar-item {% if request.path|starts_with:treinos %}active{% endif %}"
-            >
+              class="sidebar-item {% if request.path|starts_with:treinos %}active{% endif %}">
               <a class="sidebar-link" href="{{treinos}}">
                 <i class="fa-solid fa-dumbbell fa-lg me-xl-2"></i>
                 Treinos
@@ -154,33 +140,26 @@
             </li>
 
             <li
-              class="sidebar-item {% if request.path|starts_with:cadastro %}active{% endif %}"
-            >
+              class="sidebar-item {% if request.path|starts_with:cadastro %}active{% endif %}">
               <a
                 class="sidebar-link"
                 href="#exampledropdownDropdown"
-                data-bs-toggle="collapse"
-              >
+                data-bs-toggle="collapse">
                 <i class="fa-solid fa-user-plus fa-lg me-xl-2"></i>
                 Cadastros
               </a>
               <ul class="collapse list-unstyled" id="exampledropdownDropdown">
                 <li>
-                  <a class="sidebar-link py-3" href="{{cadastro}}"
-                    >Novo cliente</a
-                  >
+                  <a class="sidebar-link py-3" href="{{cadastro}}">Novo cliente</a>
                 </li>
                 <li>
-                  <a class="sidebar-link py-3" href="{% url 'cadastro-admin' %}"
-                    >Novo administrador</a
-                  >
+                  <a class="sidebar-link py-3" href="{% url 'cadastro-admin' %}">Novo administrador</a>
                 </li>
               </ul>
             </li>
 
             <li
-              class="sidebar-item {% if request.path|starts_with:exerciciosUrl %}active{% endif %}"
-            >
+              class="sidebar-item {% if request.path|starts_with:exerciciosUrl %}active{% endif %}">
               <a class="sidebar-link" href="{{exerciciosUrl}}">
                 <i class="fa-solid fa-weight-hanging fa-lg me-xl-2"></i>
                 Exercícios
@@ -210,8 +189,7 @@
           <!-- Page Footer-->
           <footer
             class="position-absolute bottom-0 bg-darkBlue text-white text-center py-3 w-100 text-xs"
-            id="footer"
-          >
+            id="footer">
             <div class="container-fluid">
               <div class="row gy-2">
                 <div class="col-sm-6 text-sm-start">
@@ -222,8 +200,7 @@
                     Design by
                     <a
                       href="https://github.com/j0aoarthur"
-                      class="text-white text-decoration-none"
-                      >João Arthur Britto
+                      class="text-white text-decoration-none">João Arthur Britto
                       <i class="ms-1 fa-brands fa-github fa-lg"></i>
                     </a>
                   </p>
@@ -235,42 +212,17 @@
       </div>
     </div>
     <!-- Bootstrap JS link-->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
     <!-- Main File-->
     <script src="{% static 'js/front.js' %}"></script>
     <!-- Custom js file -->
     <script src="{% static 'js/cadastro/script.js' %}"></script>
-    <script>
-      // ------------------------------------------------------- //
-      //   Inject SVG Sprite -
-      //   see more here
-      //   https://css-tricks.com/ajaxing-svg-sprite/
-      // ------------------------------------------------------ //
-      function injectSvgSprite(path) {
-        var ajax = new XMLHttpRequest();
-        ajax.open("GET", path, true);
-        ajax.send();
-        ajax.onload = function (e) {
-          var div = document.createElement("div");
-          div.className = "d-none";
-          div.innerHTML = ajax.responseText;
-          document.body.insertBefore(div, document.body.childNodes[0]);
-        };
-      }
-      // this is set to BootstrapTemple website as you cannot
-      // inject local SVG sprite (using only 'icons/orion-svg-sprite.svg' path)
-      // while using file:// protocol
-      // pls don't forget to change to your domain :)
-      injectSvgSprite(
-        "https://bootstraptemple.com/files/icons/orion-svg-sprite.svg"
-      );
-    </script>
     <!-- FontAwesome CSS - loading as last, so it doesn't block rendering-->
     <link
       rel="stylesheet"
       href="https://use.fontawesome.com/releases/v5.7.1/css/all.css"
       integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
-      crossorigin="anonymous"
-    />
+      crossorigin="anonymous" />
   </body>
 </html>
