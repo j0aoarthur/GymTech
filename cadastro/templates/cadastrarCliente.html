@@ -12,7 +12,6 @@
 {% endblock %}
 
 {% block content %}
-<!-- Forms Section-->
 <section class="forms">
   <div class="container-fluid">
     <div class="row">
@@ -169,51 +168,3 @@
   </div>
 </section>
 {% endblock %}
-
-<!-- alerta = {
-  'title': 'Cadastro realizado com sucesso!',
-  'content': '',
-}
-
-AddressFormSet = inlineformset_factory(
-  Person,  # Parent model (Person)
-  addressPerson,  # Child model (addressPerson)
-  fields=('cep', 'street', 'neighborhood', 'city', 'state', 'number', 'complement'),
-  can_delete=False,  # Set to True if you want to allow deleting addresses
-  extra=1,  # Number of extra address forms to display
-)
-
-if request.method == 'POST':
-
-  # if Person.objects.filter(cpf=request.POST.get("cpf")).exists():
-  #     alerta['title'] = 'CPF já cadastrado'
-  #     alerta['content'] = 'Cadastro não foi realizado, esse CPF já conta na base de dados'
-  #     return render(request, 'cadastrarCliente.html', {'alerta': alerta})
-
-  dueDate = getDueDate(request.POST.get('plan'))
-  copy_request = request.POST.copy()
-  copy_request["expiration_date"] = dueDate
-  
-  person_form = CadastrarPerson(copy_request)
-  address_formset = AddressFormSet(request.POST)
-
-  if person_form.is_valid() and address_formset.is_valid():
-      print('entrei aqui form3')
-      person = person_form.save()  # Save the Person model instance
-
-      # Link the person to the addresses and save them
-      addresses = address_formset.save(commit=False)
-      for address in addresses:
-          address.person = person
-          address.save()
-
-      return redirect('menu-principal')
-  else:
-      print('entrei aqui form2')
-      print(address_formset.errors, '1')
-      print(person_form.errors , '2')
-else:
-  person_form = CadastrarPerson()
-  address_formset = AddressFormSet()
-
-return render(request, 'cadastrarCliente.html', {'person_form': person_form, 'address_formset': address_formset}) -->
