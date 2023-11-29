@@ -5,36 +5,24 @@
 {% block subtitle %}Menu Principal{% endblock %}
 
 {% block content %}
-<!-- Dashboard Header Section    -->
 <section class="pb-0">
   <div class="container-fluid">
     <div class="row justify-content-between gy-4">
-      <!-- Statistics -->
       <div class="col-lg-3 col-sm">
         <div class="card mb-0">
           <div class="card-body">
             <div class="d-flex align-items-center">
-              <div class="icon flex-shrink-0 bg-red"><i class="fas fa-tasks"></i></div>
+              <div class="icon flex-shrink-0 bg-red"><i class="fa-solid fa-check fa-lg"></i></div>
               <div class="ms-3"><strong class="text-lg d-block lh-1 mb-1">{{people_count}}</strong><small class="text-uppercase text-gray-500 small d-block lh-1">Clientes Cadastrados</small></div>
             </div>
           </div>
         </div>
       </div>
-      <!-- <div class="col-lg-3 col-sm">
-        <div class="card mb-3">
-          <div class="card-body">
-            <div class="d-flex align-items-center">
-              <div class="icon flex-shrink-0 bg-green"><i class="far fa-calendar"></i></div>
-              <div class="ms-3"><strong class="text-lg d-block lh-1 mb-1">XXX</strong><small class="text-uppercase text-gray-500 small d-block lh-1">Clientes na academia</small></div>
-            </div>
-          </div>
-        </div>
-      </div> -->
       <div class="col-lg-3 col-sm">
         <div class="card mb-0">
           <div class="card-body">
             <div class="d-flex align-items-center">
-              <div class="icon flex-shrink-0 bg-orange"><i class="far fa-paper-plane"></i></div>
+              <div class="icon flex-shrink-0 bg-orange"><i class="fa-regular fa-calendar-xmark fa-lg"></i></i></div>
               <div class="ms-3"><strong class="text-lg d-block lh-1 mb-1">{{expired_count}}</strong><small class="text-uppercase text-gray-500 small d-block lh-1">Clientes expirados</small></div>
             </div>
           </div>

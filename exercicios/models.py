@@ -14,7 +14,7 @@ class Exercise(models.Model):
 
     id = models.AutoField(primary_key=True)
     name = models.CharField('Nome', max_length=50)
-    type = models.CharField('Tipo', max_length=8, choices=type_choices, default=' ')
+    type = models.CharField('Tipo', max_length=8, choices=type_choices, default=type_choices[0][0])
 
     def __str__(self):
         return self.name
