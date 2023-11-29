@@ -132,7 +132,6 @@ if  os.environ.get('RAILWAY', None): # if is deployed
     # Settings for deployment on Railway
     STATIC_URL = '/staticfiles/'
     STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-    # No need for STATICFILES_DIRS as Railway should handle static files
 else:
     # Settings for local development or other deployment environments
     STATIC_URL = '/staticfiles/'

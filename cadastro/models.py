@@ -29,15 +29,18 @@ class addressPerson(models.Model):
         return self.address_person.name + "'s address"
     
 class Plan(models.Model):
-    plan_choices = (
-    ('', 'Planos'),
-    ('Mensal', 'Mensal'),
-    ('Trimestral', 'Trimestral'),
-    ('Semestral', 'Semestral'),
-    ('Anual', 'Anual'),
-)
+    plan_choices = [
+        ('Planos', 
+            (
+                ('Mensal', 'Mensal'),
+                ('Trimestral', 'Trimestral'),
+                ('Semestral', 'Semestral'),
+                ('Anual', 'Anual'),
+            ),
+        ),
+    ]
     plan_person = models.OneToOneField(Person, on_delete=models.CASCADE, related_name="plan")
-    plan_name = models.CharField('Nome do plano',choices=plan_choices, max_length=10)
+    plan_name = models.CharField('Nome do plano',choices=plan_choices,default=plan_choices[0][1][3] , max_length=10)
     signature_date = models.DateField('Data de assinatura', auto_now=True)
     expiration_date = models.DateField('Data de expiração')
 

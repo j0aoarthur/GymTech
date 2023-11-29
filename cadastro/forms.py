@@ -19,32 +19,13 @@ class CadastrarPerson(ModelForm):
             "whatsapp": forms.CheckboxInput(attrs={'class': 'form-check-input', 'id': "wpp"}),
         }
 
-
-class CustomSelect(forms.Select):
-    def __init__(self, attrs=None, choices=(), *args, **kwargs):
-        attrs = attrs or {}
-        attrs['class'] = 'mt-2 form-select'  # Add your desired class here
-        attrs['id'] = 'plan'
-        attrs['required'] = ''
-        super().__init__(attrs, choices, *args, **kwargs)
-
-    def create_option(self, *args, **kwargs):
-        option = super().create_option(*args, **kwargs)
-
-        # Add class to the 'Other' option
-        if option['value'] == '':
-            option['attrs']['readonly'] = ''
-            option['attrs']['disabled'] = ''
-            
-        return option
-
 class CadastrarPlan(ModelForm):
     class Meta:
         model = Plan
         exclude = ['signature_date']
 
         widgets = {
-            "plan_name": CustomSelect(),
+            "plan_name": forms.Select(attrs={'class':'mt-2 form-select', 'id':'plan', 'required':''}),
             "expiration_date": forms.TextInput(attrs={'class':'input-material' , 'id':'dueDateLabel', 'readonly':'', 'value':' '}),
         }
 

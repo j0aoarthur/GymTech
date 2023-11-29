@@ -46,8 +46,7 @@ if (cepInput) {
   cepInput.addEventListener("input", searchCEP);
 }
 
-// Mascarar cpf
-
+// Mask CPF field
 const cpf = document.getElementById("cpf");
 
 if (cpf) {
@@ -63,8 +62,7 @@ if (cpf) {
   });
 }
 
-// Mascarar Data
-
+// Mask Date field
 const date = document.getElementById("birthDate")
 
 if (date) {
@@ -77,9 +75,7 @@ if (date) {
   })
 }
 
-// Mascarar Tel
-
-
+// Mask Phone field
 const phone = document.getElementById("phone")
 
 if (phone) {
@@ -101,7 +97,6 @@ if (phone) {
 };
 
 // Mascarar cep
-
 if (cepInput) {
   cepInput.addEventListener("keypress", () => {
     let cepLength = cepInput.value.length
@@ -113,9 +108,14 @@ if (cepInput) {
 };
 
 
-// Mostrar data de validade
+// Get Due Date
+const inputPlan = document.getElementById("plan");
 
-function getDueDate(plan) {
+function getDueDate() {
+  
+  let planName = inputPlan.value;
+
+  // Number of months corresponding the chosen plan
   const planDict = {
     'Mensal': 1,
     'Trimestral': 3,
@@ -123,28 +123,20 @@ function getDueDate(plan) {
     'Anual': 12,
   };
 
-  const currentDate = new Date();
-  const dueDate = new Date(currentDate.getFullYear(), currentDate.getMonth() + planDict[plan], currentDate.getDate());
-  
-  const day = dueDate.getDate().toString().padStart(2, '0');
-  const month = (dueDate.getMonth() + 1).toString().padStart(2, '0');
-  const year = dueDate.getFullYear();
+  let currentDate = new Date();
+  let dueDate = new Date(currentDate.getFullYear(), currentDate.getMonth() + planDict[planName], currentDate.getDate());
+  let formatedDueDate = dueDate.toLocaleDateString('pt-BR');
 
-  return `${day}/${month}/${year}`;
+  document.getElementById("dueDateLabel").value = formatedDueDate;
+}
+
+if (inputPlan) {
+  document.addEventListener("DOMContentLoaded", (getDueDate))
+  inputPlan.addEventListener("change", (getDueDate))
 }
 
 
-const planSelect = document.getElementById("plan");
-
-if (planSelect) {
-  planSelect.addEventListener("change", () => {
-    let planName = planSelect.value;
-    let dueDate = getDueDate(planName);
-    document.getElementById("dueDateLabel").value = dueDate;
-  })
-}
-
-
+// Preview profile picture
 const profileImageDefault = document.getElementById("profileDefault")
   
 function preview() {

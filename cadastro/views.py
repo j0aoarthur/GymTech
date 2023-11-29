@@ -14,49 +14,35 @@ def cadastrar(request):
         if Person.objects.filter(cpf=request.POST.get("cpf")).exists():
             messages.error(request, 'Cadastro não foi realizado, esse CPF já conta na base de dados.')
 
-            return redirect('cadastro')
-        
-        print(request.POST)
+            return redirect('cadastro') 
 
         person_form = CadastrarPerson(request.POST, request.FILES)
         plan_formset = PlanFormSet(request.POST)
         address_formset = AddressFormSet(request.POST)
 
 
-        if person_form.is_valid():
-            if plan_formset.is_valid():
-                if address_formset.is_valid():
-                    person = person_form.save(commit=False)
-                    if person.profileImage:
-                        person.profileImage.name = f"initialProfileImage.{person.profileImage.name.split('.')[-1]}"
-                    person.save()
+        if person_form.is_valid() and plan_formset.is_valid() and address_formset.is_valid():
+            person = person_form.save(commit=False)
+            if person.profileImage: # save the profile picture
+                person.profileImage.name = f"initialProfileImage.{person.profileImage.name.split('.')[-1]}"
+            person.save()
 
-                    addresses = address_formset.save(commit=False)
-                    plans = plan_formset.save(commit=False)
-                    for address in addresses:
-                        address.address_person = person
-                        address.save()
-                    
-                    for plan in plans:
-                        plan.plan_person = person
-                        plan.save()
-                    
-                        
-                    messages.success(request, f'{request.POST.get("name")} está cadastrado, ele(a) já pode frequentar o local. O seu plano estará válido até {request.POST.get("plan-0-expiration_date")}')
+            addresses = address_formset.save(commit=False)
+            plans = plan_formset.save(commit=False)
+            for address in addresses:
+                address.address_person = person
+                address.save()
+            
+            for plan in plans:
+                plan.plan_person = person
+                plan.save()
+            
+                
+            messages.success(request, f'{request.POST.get("name")} está cadastrado, ele(a) já pode frequentar o local. O seu plano estará válido até {request.POST.get("plan-0-expiration_date")}')
+        else:
+            messages.warning(request, 'Formulário inválido! Tente preencher novamente corretamente.')
 
-                    return redirect('cadastro')
-                else: # address_formset invalid
-                    messages.warning(request, 'Endereço inválido! Tente preencher novamente esse campo corretamente.')
-
-                    return redirect('cadastro')
-            else: #plan invalid
-                messages.warning(request, 'Plano de assinatura inválido! Tente preencher novamente esse campo corretamente.')
-
-                return redirect('cadastro')
-        else: #person_form invalid
-            messages.warning(request, 'Dados cadastrais inválidos! Tente preencher novamente esse campo corretamente.')
-
-            return redirect('cadastro')
+        return redirect('cadastro')
 
     elif request.method == 'GET':
         person_form = CadastrarPerson()
@@ -69,7 +55,7 @@ def cadastrar(request):
             'plan_formset':plan_formset,
         }
 
-    return render(request, 'cadastrarCliente.html', context=context)
+        return render(request, 'cadastrarCliente.html', context=context)
 
 @login_required
 def admin(request):
