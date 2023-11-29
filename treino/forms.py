@@ -7,7 +7,6 @@ class ExerciciosTreino(ModelForm):
     class Meta:
         model = Workout_exercise
         exclude = ("workout",)
-        # fields = "__all__"
 
         widgets = {
             "exercise":forms.Select(attrs={'class':'form-select'}),

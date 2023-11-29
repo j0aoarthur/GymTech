@@ -145,17 +145,6 @@ def criarTreino(request, usuario_id):
 
             return render(request, 'criarTreino.html', context=context)
 
-def testando(request, usuario_id):
-
-    person = Person.objects.get(pk=usuario_id)
-    workouts = Workout.objects.filter(workout_person=person)
-
-    for x,workout in enumerate(workouts):
-        print(workout, x)
-
-    return render(request, 'teste2.html')
-
-
 @login_required
 def alterarTreino(request, usuario_id, workout):
     formset = AddExerciciosTreino()
@@ -344,7 +333,6 @@ def alterarTreino(request, usuario_id, workout):
     person = Person.objects.get(pk=usuario_id)
     curr_workout = Workout.objects.get(workout_person=person, workout_name=workout)
     workout_exercises = curr_workout.exercises.all()
-    treino_formset = CadastrarTreino()
 
     treino = Treino(request.POST or None, instance=curr_workout)
 

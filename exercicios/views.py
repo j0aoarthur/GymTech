@@ -8,7 +8,7 @@ from django.contrib.auth.decorators import login_required
 @login_required
 def exercicios(request):
 
-    exercicios = Exercise.objects.all()
+    exercicios = Exercise.objects.all().order_by("name")
     if request.method == 'POST':
         form = CadastrarExercise(request.POST)
 
@@ -49,7 +49,6 @@ def editar(request, exercise_id):
 
     if form.is_valid():
         form.save()
-
         return redirect('exercicios')
     
     context = {
