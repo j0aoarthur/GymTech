@@ -1,32 +1,9 @@
 {% if messages %}
 
 {% for message in messages %}
-
-<!-- <div id="fade" class="modal-backdrop fade show"></div>
-<div class="modal fade show d-block " id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" role="dialog">
-    <div class="modal-dialog modal-dialog-centered ">
-        <div class="modal-content ">
-            <div class="modal-header">
-                <button type="button" class="btn-close" data-bs-dismiss="modal" onclick="closeModal()"
-                    aria-label="Close"></button>
-            </div>
-            <div class="modal-body text-center mx-2">
-                <h6>{{ message }}</h6>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" onclick="closeModal()"
-                    data-bs-dismiss="modal">Fechar</button>
-                <button type="button" class="btn btn-primary" onclick="window.history.go(-1);">Voltar</button>
-            </div>
-        </div>
-    </div>
-</div> -->
-
 <div class="alert {{ message.tags }} alert-dismissible fade show m-3 rounded-4" role="alert">
     {{message}}
     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 </div>
-
-
 {% endfor %}
 {% endif %}

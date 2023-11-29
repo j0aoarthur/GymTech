@@ -14,18 +14,12 @@ from django.utils import timezone
 def main(request):
 
     people = Person.objects.all().order_by("-plan__signature_date","-matricula")
-
-    expired_count = 0
-    for person in people:
-        if person.plan.expiration_date < timezone.now().date():
-            expired_count += 1
+    expired_count = people.filter(plan__expiration_date__lt=timezone.now().date()).count()
 
     context = {
         "people":people[:3],
         "people_count":people.count(),
         "expired_count":expired_count,
-
-
     }
     return render(request, 'index.html', context=context)
 

@@ -1,5 +1,10 @@
 {% extends 'head_layout.html' %}
 
+
+
+
+{% block main_layout %}
+
 {% load static %}
 {% load customTags %}
 {% now "Y" as current_year %}
@@ -10,9 +15,6 @@
 {% url 'exercicios' as exerciciosUrl %}
 {% now "d/m/Y" as current_date %}
 
-
-  
-{% block main_layout %}
   <div class="page">
     <!-- Main Navbar-->
     <header class="header z-index-50">
