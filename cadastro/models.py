@@ -9,7 +9,7 @@ class Person(models.Model):
     birthDate = models.DateField('Data de nascimento')
     phone = models.CharField('Telefone', max_length=15)
     whatsapp = models.BooleanField('Possui whatsapp?', default=True)
-    profileImage = models.ImageField('Imagem de perfil', upload_to ="profileImages/", blank=True)
+    profileImage = models.ImageField('Imagem de perfil', blank=True, null=True)
     
     def __str__(self):
         return str(self.matricula) + ' - ' + self.name
