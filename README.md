@@ -5,7 +5,7 @@ Bem-vindo ao GymTech, um aplicativo web construído em Django para gerenciar aca
 O GymTech oferece recursos de cadastro de clientes e administradores, criação de treinos 
 personalizados e cadastro de exercícios. Este projeto, desenvolvido por mim, João Arthur Britto, 
 tem como objetivo aprimorar meu portfólio de desenvolvedor e 
-servir como um meio de aprendizado contínuo do framework web Django.
+servir como um meio de aprendizado contínuo do framework web Django e do PostgreSQL.
 
 ## Funcionalidades Principais
 
@@ -31,7 +31,7 @@ servir como um meio de aprendizado contínuo do framework web Django.
 <span>
     <img src="https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54">
     <img src="https://img.shields.io/badge/django-%23092E20.svg?style=for-the-badge&logo=django&logoColor=white">
-    <img src="https://img.shields.io/badge/SQLite-07405E?style=for-the-badge&logo=sqlite&logoColor=white">
+    <img src="https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white">
     <img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white">
     <img src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white">
     <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black">
@@ -49,7 +49,7 @@ Utilize as seguintes credenciais para fazer login como usuário de teste:
 </ul>
 
 ## Desafios encontrados
-Durante o desenvolvimento deste projeto, enfrentei diversos desafios, incluindo a integração de tecnologias variadas, como o Django, SQLite3 e Bootstrap.
+Durante o desenvolvimento deste projeto, enfrentei diversos desafios, incluindo a integração de tecnologias variadas, como o Django, PostgreSQL e Bootstrap.
 
 Simultâneamente ao desenvolvimento desse projeto, também estava estudando e aprendendo sobre o Django, então muitas vezes precisei refatorar o código quando descobria uma funcionalidade nova do Django que melhoraria o codigo e o deixaria mais eficiente.
 
