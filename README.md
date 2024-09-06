@@ -60,6 +60,7 @@ Algumas partes do aplicativo:
 
 <div align="center">
     <img src="staticfiles/img/readme_pics/login.png" width="300"/>
+    <img src="staticfiles/img/readme_pics/admin.png" width="300"/>
     <img src="staticfiles/img/readme_pics/menu.png" width="300"/>
     <img src="staticfiles/img/readme_pics/usuarios.png" width="300"/>
     <img src="staticfiles/img/readme_pics/cadastro.png" width="300"/>
