@@ -39,7 +39,7 @@ servir como um meio de aprendizado contínuo do framework web Django e do Postgr
 </span>
 
 ## Acesso ao Aplicativo
-O GymTech já está disponível online! Você pode acessá-lo pelo link: [gymtech.cloud](https://gymtech.cloud/)
+O GymTech já está disponível online! Você pode acessá-lo pelo link: [gym-tech.vercel.app](https://gym-tech.vercel.app/)
 
 Utilize as seguintes credenciais para fazer login como usuário de teste:
 
